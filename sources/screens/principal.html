@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h1>Janela principal!!</h1>
+        <button id="bTrocarTitle">Trocar title</button>
+
+        <script>
+            document.getElementById("bTrocarTitle").addEventListener("click", () => {
+                window.electronAPI.setTitle('Bom Demais!!');
+            });
+        </script>
+    </body>
+</html>

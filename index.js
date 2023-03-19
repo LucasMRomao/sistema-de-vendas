@@ -3,6 +3,7 @@ const path = require('path')
 
 function createWindow () {
   const loginWindow = new BrowserWindow({
+    show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -10,21 +11,32 @@ function createWindow () {
 
   ipcMain.on('logar', () => {
     const mainWindow = new BrowserWindow({
-        webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
-        }
-    })
-
-    ipcMain.on('set-title', (event, title) => {
-        const webContents = event.sender
-        const win = BrowserWindow.fromWebContents(webContents)
-        win.setTitle(title)
+      frame: false,
+      movable: true,
+      webPreferences: {
+          preload: path.join(__dirname, 'preload.js')
+      }
     })
 
     mainWindow.loadURL(`file://${__dirname}/sources/screens/principal.html`)
+    loginWindow.close()
+  })
+
+  ipcMain.on('sair-do-sistema', () => {
+    app.quit()
+  })
+
+  ipcMain.on('set-title', (event, title) => {
+    const webContents = event.sender
+    const win = BrowserWindow.fromWebContents(webContents)
+    win.setTitle(title)
   })
 
   loginWindow.loadFile(`${__dirname}/sources/screens/login.html`)
+
+  loginWindow.once('ready-to-show', () => {
+    loginWindow.show()
+  })
 }
 
 app.whenReady().then(() => {

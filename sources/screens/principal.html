@@ -1,15 +1,54 @@
 <html>
     <head>
-        <title></title>
+        <title>Principal</title>
+        <link rel="stylesheet" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/principal.css" />
     </head>
-    <body>
-        <h1>Janela principal!!</h1>
-        <button id="bTrocarTitle">Trocar title</button>
-
-        <script>
-            document.getElementById("bTrocarTitle").addEventListener("click", () => {
-                window.electronAPI.setTitle('Bom Demais!!');
-            });
-        </script>
+    <body style="padding: 20px;">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12 col-sm-3">
+                    <figure>
+                        <img class="img-fluid img-thumbnail" src="../icons/ponto-de-venda.png" />
+                        <figcaption class="figure-caption">VENDAS</figcaption>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <figure>
+                        <img class="img-fluid img-thumbnail" src="../icons/ipq.png" />
+                        <figcaption class="figure-caption">CADASTRO DE PRODUTOS</figcaption>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <figure>
+                        <img class="img-fluid img-thumbnail" src="../icons/team.png" />
+                        <figcaption class="figure-caption">CADASTRO DE USUÁRIOS</figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-12 col-sm-3">
+                    <figure>
+                        <img style="opacity: 0.5" class="img-fluid img-thumbnail" src="../icons/work-in-progress.png" />
+                        <figcaption class="figure-caption">EM CONSTRUÇÃO</figcaption>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <figure>
+                        <img class="img-fluid img-thumbnail" src="../icons/sistema-operativo.png" />
+                        <figcaption class="figure-caption">CONFIGURAÇÕES</figcaption>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <figure>
+                        <img class="img-fluid img-thumbnail" id="bSair" src="../icons/log-out.png" />
+                        <figcaption class="figure-caption">SAIR</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <script src="../js/jquery-3.6.4.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/principal.js"></script>
     </body>
 </html>

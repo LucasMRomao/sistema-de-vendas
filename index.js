@@ -22,6 +22,17 @@ function createWindow () {
     loginWindow.close()
   })
 
+  ipcMain.on('abrir-cadastro-usuarios', () => {
+    const cadastroUsuariosWindow = new BrowserWindow({
+      frame: false,
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js')
+    }
+    })
+
+    cadastroUsuariosWindow.loadURL(`file://${__dirname}/sources/screens/cadastro-de-usuarios.html`)
+  })
+
   ipcMain.on('sair-do-sistema', () => {
     app.quit()
   })

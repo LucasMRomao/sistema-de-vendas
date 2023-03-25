@@ -2,6 +2,7 @@
     <head>
         <title></title>
         <link rel="stylesheet" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/cadastro-de-usuarios.css" />
     </head>
     <body>
         <table class="table table-hover" id="tableUsuarios">
@@ -19,10 +20,47 @@
         </table>
 
         <div style="width: 100px; height: 100px;" class="fixed-bottom">
-            <img class="img-fluid" src="../icons/cancel.png"/>
+            <img class="img-fluid" src="../icons/cancel.png" id="bFechar"/>
         </div>
         <script src="../js/jquery-3.6.4.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/cadastro-de-usuarios.js"></script>
+
+        <!--Modals-->
+        <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <div class="input-group-text">Usuário</div>
+                        <input type="text" class="form-control" id="iUsuarioAntigoEditar" disabled>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="input-group">
+                        <div class="input-group-text">Usuário</div>
+                        <input type="text" class="form-control" id="iUsuarioEditar">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="input-group">
+                        <div class="input-group-text">Nome</div>
+                        <input type="text" class="form-control" id="iNomeEditar">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Salvar</button>
+            </div>
+            </div>
+        </div>
+        </div>
+        <!--Fim Modals-->
     </body>
 </html>

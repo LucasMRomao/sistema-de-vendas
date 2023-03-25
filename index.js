@@ -33,6 +33,10 @@ function createWindow () {
     cadastroUsuariosWindow.loadURL(`file://${__dirname}/sources/screens/cadastro-de-usuarios.html`)
   })
 
+  ipcMain.on('fechar-tela-atual', (event) => {
+    console.log(event.sender.close())
+  })
+
   ipcMain.on('sair-do-sistema', () => {
     app.quit()
   })

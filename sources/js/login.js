@@ -24,7 +24,7 @@ $(() => {
             $("#password").attr("disabled", false);
         }else{
             $.ajax({
-                url: "http://localhost/sistema-de-vendas/usuarios/get_usuario.php",
+                url: "http://localhost:3333/validarusuario",
                 method: "POST",
                 data: {
                     usuario: usuario,
@@ -32,8 +32,8 @@ $(() => {
                 },
                 success: (result) => {
                     console.log(result);
-                    if(result){
-                        window.electronAPI.logar(result);
+                    if(result[0]){
+                        window.electronAPI.logar(result[0]);
                     }else{
                         alert("Usuário e/ou senha inválidos!");
                     }

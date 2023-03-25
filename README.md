@@ -1,12 +1,28 @@
-# Sistema de vendas
-### (Em construção)
+# Adonis API application
 
-Projeto de sistema de vendas universal feito em Electron.
+This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
 
-**Comandos após a clonagem do projeto:**
+1. Bodyparser
+2. Authentication
+3. CORS
+4. Lucid ORM
+5. Migrations and seeds
 
-_Se não tiver o Electron instalado:_
-> npm install -g electron
+## Setup
 
-_Executar o projeto:_
-> electron .
+Use the adonis command to install the blueprint
+
+```bash
+adonis new yardstick --api-only
+```
+
+or manually clone the repo and then run `npm install`.
+
+
+### Migrations
+
+Run the following command to run startup migrations.
+
+```js
+adonis migration:run
+```

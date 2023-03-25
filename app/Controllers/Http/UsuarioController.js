@@ -9,8 +9,8 @@ class UsuarioController {
     }
 
     async show({ params }){
-        const TipoUsuario = await Usuario.findOrFail(params.id)
-        return TipoUsuario
+        const usuario = await Usuario.findOrFail(params.id)
+        return usuario
     }
 
     async store({ request }){
@@ -22,12 +22,12 @@ class UsuarioController {
             'tipo_usuario'
         ])
 
-        const TipoUsuario = await Usuario.create(data)
-        return TipoUsuario
+        const usuario = await Usuario.create(data)
+        return usuario
     }
 
     async update({ params, request }){
-        const TipoUsuario = await Usuario.findOrFail(params.id)
+        const usuario = await Usuario.findOrFail(params.id)
         const data = request.only([
             'usuario',
             'nome',
@@ -35,14 +35,23 @@ class UsuarioController {
             'senha',
             'tipo_usuario'
         ])
-        TipoUsuario.merge(data)
-        await TipoUsuario.save()
-        return TipoUsuario
+        usuario.merge(data)
+        await usuario.save()
+        return usuario
     }
 
     async destroy({ params }){
-        const TipoUsuario = await Usuario.findOrFail(params.id)
-        return await TipoUsuario.delete()
+        const usuario = await Usuario.findOrFail(params.id)
+        return await usuario.delete()
+    }
+
+    async validarusuario({ request }){
+        const data = request.only([
+            'usuario',
+            'senha'
+        ])
+
+        return Usuario.validarUsuario(data)
     }
 }
 

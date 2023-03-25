@@ -23,3 +23,5 @@ Route.get('/', () => {
 Route.resource('/tiposusuario', 'TiposUsuarioController').apiOnly()
 Route.resource('/usuarios', 'UsuarioController').apiOnly()
 Route.resource('/produtos', 'ProdutoController').apiOnly()
+
+Route.post('/validarusuario', 'UsuarioController.validarusuario')

@@ -2,6 +2,7 @@
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
+const Database = use('Database')
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash')
@@ -24,6 +25,10 @@ class User extends Model {
         userInstance.password = await Hash.make(userInstance.password)
       }
     })
+  }
+
+  static validarUsuario({ usuario, senha }){
+    return Database.table("usuarios").select("*").where("usuario", usuario).where("senha", senha)
   }
 
   /**

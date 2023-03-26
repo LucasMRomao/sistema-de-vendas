@@ -3,21 +3,104 @@
         <title></title>
         <link rel="stylesheet" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" href="../css/cadastro-de-usuarios.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-        <table class="table table-hover" id="tableUsuarios">
-            <thead>
-                <tr>
-                    <th style="display: none;">ID</th>
-                    <th>Nome</th>
-                    <th>Usuário</th>
-                    <th>Senha</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-12">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-success" data-bs-toggle='modal' data-bs-target='#modalEditarUsuario' id="bCadastrarUsuario">Cadastrar novo usuário</button>&nbsp;
+                    <button type="button" class="btn btn-success" id="bExportarDadosUsuarios">Exportar dados</button>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col">
+                            <span><b>Selecionar campos visíveis</b></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelNome" toogle-visibility="nome">
+                                <label class="form-check-label" for="cVisivelNome">Nome</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelUsuario" toogle-visibility="usuario">
+                                <label class="form-check-label" for="cVisivelUsuario">Usuário</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelEmail" toogle-visibility="email">
+                                <label class="form-check-label" for="cVisivelEmail">Email</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelSenha" toogle-visibility="senha">
+                                <label class="form-check-label" for="cVisivelSenha">Senha</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelTipo" toogle-visibility="tipo">
+                                <label class="form-check-label" for="cVisivelTipo">Tipo</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelAcoes" toogle-visibility="acoes">
+                                <label class="form-check-label" for="cVisivelAcoes">Ações</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="alert alert-primary">
+                    <div class="row">
+                        <div class="col-12">
+                            <span><b>Buscar usuário</b></span>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group mb-3">
+                                <select class="form-control" id="sBuscarPor" onchange="changeBuscar()">
+                                    <option value="Nome">Nome</option>
+                                    <option value="Usuario">Usuário</option>
+                                    <option value="Email">Email</option>
+                                    <option value="Tipo">Tipo</option>
+                                </select>
+                                <input type="text" class="form-control" id="iBuscarNome" placeholder="Digite o nome aqui" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" style="display: none;" class="form-control" id="iBuscarUsuario" placeholder="Digite o usuário" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" style="display: none;" class="form-control" id="iBuscarEmail" placeholder="Digite o email aqui" aria-label="Username" aria-describedby="basic-addon1">
+                                <select style="display: none;" class="form-control" id="iBuscarTipo"></select>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <table class="table  table-primary table-hover" id="tableUsuarios">
+                    <thead>
+                        <tr>
+                            <th style="display: none;">ID</th>
+                            <th class="toogle-visibility-nome">Nome</th>
+                            <th class="toogle-visibility-usuario">Usuário</th>
+                            <th class="toogle-visibility-email">Email</th>
+                            <th class="toogle-visibility-senha">Senha</th>
+                            <th class="toogle-visibility-tipo">Tipo</th>
+                            <th class="toogle-visibility-acoes">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <div style="width: 100px; height: 100px;" class="fixed-bottom">
             <img class="img-fluid" src="../icons/cancel.png" id="bFechar"/>
@@ -28,38 +111,53 @@
 
         <!--Modals-->
         <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar usuário</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <div class="input-group">
-                        <div class="input-group-text">Usuário</div>
-                        <input type="text" class="form-control" id="iUsuarioAntigoEditar" disabled>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditarUsuarioTitulo">Editar usuário</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <input type="hidden" id="idUsuarioEditar"/>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">Usuário</div>
+                                <input type="text" class="form-control" id="iUsuarioEditar" disabled>
+                                <button class="btn btn-primary" id="btnToogleAlterarUsuario" onclick="toogleDisabledInputUsuario($(this).prop('indice-usuario'))" indice-usuario="">Alterar</button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">Nome</div>
+                                <input type="text" class="form-control" id="iNomeEditar">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">Email</div>
+                                <input type="text" class="form-control" id="iEmailEditar">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">Tipo de usuário</div>
+                                <select class="form-control" id="sTipoUsuarioEditar"></select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <button class="btn btn-primary" data-bs-dismiss="modal" onclick="resetarSenhaUsuarioEditando();">Resetar senha</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limparEdicao();">Cancelar</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="salvarEdicao();">Salvar</button>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <div class="input-group">
-                        <div class="input-group-text">Usuário</div>
-                        <input type="text" class="form-control" id="iUsuarioEditar">
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <div class="input-group">
-                        <div class="input-group-text">Nome</div>
-                        <input type="text" class="form-control" id="iNomeEditar">
-                    </div>
-                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Salvar</button>
-            </div>
-            </div>
-        </div>
         </div>
         <!--Fim Modals-->
     </body>

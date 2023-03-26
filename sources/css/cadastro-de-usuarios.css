@@ -1,3 +1,7 @@
 img:hover{
     cursor: pointer;
 }
+
+body{
+    padding: 20px;
+}

@@ -27,14 +27,14 @@ function createWindow () {
       frame: false,
       webPreferences: {
         preload: path.join(__dirname, 'preload.js')
-    }
+      }
     })
 
     cadastroUsuariosWindow.loadURL(`file://${__dirname}/sources/screens/cadastro-de-usuarios.html`)
   })
 
   ipcMain.on('fechar-tela-atual', (event) => {
-    console.log(event.sender.close())
+    event.sender.close()
   })
 
   ipcMain.on('sair-do-sistema', () => {

@@ -25,3 +25,8 @@ Route.resource('/usuarios', 'UsuarioController').apiOnly()
 Route.resource('/produtos', 'ProdutoController').apiOnly()
 
 Route.post('/validarusuario', 'UsuarioController.validarusuario')
+Route.put('/resetarsenhausuario/:id', 'UsuarioController.resetarSenhaUsuario')
+Route.post('/getusersbyname', 'UsuarioController.getUsersByName')
+Route.post('/getusersbyusuario', 'UsuarioController.getUsersByUsuario')
+Route.post('/getusersbyemail', 'UsuarioController.getUsersByEmail')
+Route.post('/getusersbytipo', 'UsuarioController.getUsersByTipo')

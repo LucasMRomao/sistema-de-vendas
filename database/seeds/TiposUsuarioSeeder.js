@@ -15,9 +15,9 @@ const Database = use('Database')
 
 class TiposUsuarioSeeder {
   async run () {
-    await Database.table('tipos_usuario').insert(
-      {descricao: 'Administrador'}
-    )
+    await Database.table('tipos_usuario').insert({
+      descricao: 'Administrador'
+    })
 
     await Database.table('tipos_usuario').insert({
       descricao: 'Colaborador'

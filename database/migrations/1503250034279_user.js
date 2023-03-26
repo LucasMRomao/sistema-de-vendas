@@ -11,7 +11,7 @@ class UserSchema extends Schema {
       table.string('nome', 50).notNullable()
       table.string('email', 254).notNullable().unique()
       table.string('senha', 60).notNullable()
-      table.integer('tipo_usuario').unsigned().references('id').inTable('tipos_usuario').notNullable()
+      table.integer('tipo_usuario_id').unsigned().references('id').inTable('tipos_usuario').notNullable()
       table.timestamps()
     })
   }

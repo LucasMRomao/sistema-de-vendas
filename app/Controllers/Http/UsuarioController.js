@@ -10,6 +10,7 @@ class UsuarioController {
 
     async show({ params }){
         const usuario = await Usuario.findOrFail(params.id)
+        await usuario.load('tipoUsuario')
         return usuario
     }
 
@@ -19,7 +20,7 @@ class UsuarioController {
             'nome',
             'email',
             'senha',
-            'tipo_usuario'
+            'tipo_usuario_id'
         ])
 
         const usuario = await Usuario.create(data)
@@ -32,8 +33,7 @@ class UsuarioController {
             'usuario',
             'nome',
             'email',
-            'senha',
-            'tipo_usuario'
+            'tipo_usuario_id'
         ])
         usuario.merge(data)
         await usuario.save()
@@ -52,6 +52,30 @@ class UsuarioController {
         ])
 
         return Usuario.validarUsuario(data)
+    }
+
+    async resetarSenhaUsuario({ params }){
+        return Usuario.resetarSenhaUsuario(params.id)
+    }
+
+    async getUsersByName({ request }){
+        const data = request.only(['nome'])
+        return Usuario.getUsersByName(data.nome)
+    }
+
+    async getUsersByUsuario({ request }){
+        const data = request.only(['usuario'])
+        return Usuario.getUsersByUsuario(data.usuario)
+    }
+
+    async getUsersByEmail({ request }){
+        const data = request.only(['email'])
+        return Usuario.getUsersByEmail(data.email)
+    }
+
+    async getUsersByTipo({ request }){
+        const data = request.only(['idtipo'])
+        return Usuario.getUsersByTipo(data.idtipo)
     }
 }
 

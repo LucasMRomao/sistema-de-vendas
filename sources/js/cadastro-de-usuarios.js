@@ -30,14 +30,16 @@ function toogleDisabledInputUsuario(indice){
 function cadastrarUsuario(){
     $("#modalEditarUsuarioTitulo").text("Cadastrar novo usuário");
     $("#btnToogleAlterarUsuario").hide();
+    $("#divResetarSenha").hide();
     $("#iUsuarioEditar").removeAttr("disabled");
 }
 
 function editar(i){
     $("#modalEditarUsuarioTitulo").text("Editar usuário");
     $("#btnToogleAlterarUsuario").show();
+    $("#divResetarSenha").show();
+
     let user = usuarios[i];
-    console.log(user);
     $("#btnToogleAlterarUsuario").prop("indice-usuario", i);
     $("#idUsuarioEditar").val(user.id);
     $("#iUsuarioEditar").val(user.usuario);

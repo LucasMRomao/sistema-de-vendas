@@ -2,6 +2,9 @@ const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 
 function createWindow () {
+
+  let cadastroUsuariosWindow = null;
+
   const loginWindow = new BrowserWindow({
     show: false,
     webPreferences: {
@@ -23,14 +26,22 @@ function createWindow () {
   })
 
   ipcMain.on('abrir-cadastro-usuarios', () => {
-    const cadastroUsuariosWindow = new BrowserWindow({
-      frame: false,
-      webPreferences: {
-        preload: path.join(__dirname, 'preload.js')
-      }
-    })
-
-    cadastroUsuariosWindow.loadURL(`file://${__dirname}/sources/screens/cadastro-de-usuarios.html`)
+    if(cadastroUsuariosWindow == null){
+      cadastroUsuariosWindow = new BrowserWindow({
+        frame: false,
+        webPreferences: {
+          preload: path.join(__dirname, 'preload.js')
+        }
+      })
+  
+      cadastroUsuariosWindow.loadURL(`file://${__dirname}/sources/screens/cadastro-de-usuarios.html`)
+  
+      cadastroUsuariosWindow.on("closed", () => {
+        cadastroUsuariosWindow = null
+      })
+    }else{
+      cadastroUsuariosWindow.show()
+    }
   })
 
   ipcMain.on('fechar-tela-atual', (event) => {

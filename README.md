@@ -1,12 +1,13 @@
 # Sistema de vendas
+## Mobile
 ### (Em construção)
 
-Projeto de sistema de vendas universal feito em Electron.
+Projeto mobile do sistema de vendas universal.
 
 **Comandos após a clonagem do projeto:**
 
-_Se não tiver o Electron instalado:_
-> npm install -g electron
+_Se não tiver o ExpoCLI instalado:_
+> npm install --global expo-cli
 
 _Executar o projeto:_
-> electron .
+> expo start

@@ -23,6 +23,7 @@ Route.get('/', () => {
 Route.resource('/tiposusuario', 'TiposUsuarioController').apiOnly()
 Route.resource('/usuarios', 'UsuarioController').apiOnly()
 Route.resource('/produtos', 'ProdutoController').apiOnly()
+Route.resource('/setores', 'SetorController').apiOnly()
 
 Route.post('/validarusuario', 'UsuarioController.validarusuario')
 Route.put('/resetarsenhausuario/:id', 'UsuarioController.resetarSenhaUsuario')

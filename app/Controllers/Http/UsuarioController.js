@@ -32,6 +32,7 @@ class UsuarioController {
         const data = request.only([
             'usuario',
             'nome',
+            'senha',
             'email',
             'tipo_usuario_id'
         ])

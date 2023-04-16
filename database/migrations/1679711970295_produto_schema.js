@@ -10,7 +10,9 @@ class ProdutoSchema extends Schema {
       table.string('descricao').notNullable()
       table.decimal('preco_custo').notNullable()
       table.decimal('preco_venda').notNullable()
-      table.decimal('porcentagem_lucro', [2, 10]).notNullable()
+      table.decimal('porcentagem_lucro').notNullable()
+      table.integer('quantidade_estoque').notNullable()
+      table.integer('id_setor')//.references('id').inTable('setores').notNullable()
       table.timestamps()
     })
   }

@@ -18,7 +18,9 @@ class ProdutoController {
             'descricao',
             'preco_custo',
             'preco_venda',
-            'porcentagem_lucro'
+            'porcentagem_lucro',
+            'quantidade_estoque',
+            'id_setor'
         ])
 
         const produto = await Produto.create(data)
@@ -31,7 +33,9 @@ class ProdutoController {
             'descricao',
             'preco_custo',
             'preco_venda',
-            'porcentagem_lucro'
+            'porcentagem_lucro',
+            'quantidade_estoque',
+            'id_setor'
         ])
         produto.merge(data)
         await produto.save()

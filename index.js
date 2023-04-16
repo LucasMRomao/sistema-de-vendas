@@ -4,6 +4,7 @@ const path = require('path')
 function createWindow () {
 
   let cadastroUsuariosWindow = null;
+  let cadastroProdutosWindow = null;
 
   const loginWindow = new BrowserWindow({
     show: false,
@@ -41,6 +42,25 @@ function createWindow () {
       })
     }else{
       cadastroUsuariosWindow.show()
+    }
+  })
+
+  ipcMain.on('abrir-cadastro-produtos', () => {
+    if(cadastroProdutosWindow == null){
+      cadastroProdutosWindow = new BrowserWindow({
+        frame: false,
+        webPreferences: {
+          preload: path.join(__dirname, 'preload.js')
+        }
+      })
+
+      cadastroProdutosWindow.loadURL(`file://${__dirname}/sources/screens/cadastro-de-produtos.html`)
+  
+      cadastroProdutosWindow.on("closed", () => {
+        cadastroProdutosWindow = null
+      })
+    }else{
+      cadastroProdutosWindow.show()
     }
   })
 

@@ -3,11 +3,13 @@ var MD5 = function(d){var r = M(V(Y(X(d),8*d.length)));return r.toLowerCase()};f
 var usuarios = null;
 var tiposUsuario = null;
 
+var CONFIG;
+
 function resetarSenhaUsuarioEditando(){
     if(confirm("Deseja realmente voltar a senha padrão para o usuário selecionado?")){
         $.ajax({
             method: "PUT",
-            url: "http://localhost:3333/resetarsenhausuario/" + $("#idUsuarioEditar").val(),
+            url: CONFIG.URL_API + "/resetarsenhausuario/" + $("#idUsuarioEditar").val(),
             success: (result) => {
                 console.log(result);
                 if(result){
@@ -52,11 +54,11 @@ function excluir(i){
     if(confirm("Deseja realmente excluir o usuário " + usuarios[i].usuario + "?")){
         $.ajax({
             method: "DELETE",
-            url: "http://localhost:3333/usuarios/" + usuarios[i].id,
+            url: CONFIG.URL_API + "/usuarios/" + usuarios[i].id,
             success: (result) => {
                 if(result){
                     alert("Usuário excluído com sucesso!");
-                    listarUsuarios();
+                    getUsers();
                 }
             }
         });
@@ -80,7 +82,7 @@ function salvarEdicao(){
 
         if(idUsuario){
             $.ajax({
-                url: "http://localhost:3333/usuarios/" + idUsuario,
+                url: CONFIG.URL_API + "/usuarios/" + idUsuario,
                 method: "PUT",
                 data: {
                     usuario: $("#iUsuarioEditar").val(),
@@ -91,7 +93,7 @@ function salvarEdicao(){
                 success: (result) => {
                     if(result.id){
                         alert("Alteração realizada com sucesso.");
-                        listarUsuarios();
+                        getUsers();
                     }else{
                         alert("Erro ao salvar alteração. Tente novamente.")
                     }
@@ -99,7 +101,7 @@ function salvarEdicao(){
             });
         }else{
             $.ajax({
-                url: "http://localhost:3333/usuarios",
+                url: CONFIG.URL_API + "/usuarios",
                 method: "POST",
                 data: {
                     usuario: $("#iUsuarioEditar").val(),
@@ -111,7 +113,7 @@ function salvarEdicao(){
                 success: (result) => {
                     if(result.id){
                         alert("Usuário criado com sucesso!");
-                        listarUsuarios();
+                        getUsers();
                     }else{
                         alert("Erro ao cadastrar usuário. Tente novamente.");
                     }
@@ -169,6 +171,20 @@ function listarUsuarios(){
 
         $("#tableUsuarios>tbody").append(linha);
     }
+
+    let ativos = {
+        nome: $("#cVisivelNome").is(":checked"),
+        usuario: $("#cVisivelUsuario").is(":checked"),
+        email: $("#cVisivelEmail").is(":checked"),
+        senha: $("#cVisivelSenha").is(":checked"),
+        tipo: $("#cVisivelTipo").is(":checked")
+    }
+
+    if(!ativos.nome) $(".toogle-visibility-nome").hide()
+    if(!ativos.usuario) $(".toogle-visibility-usuario").hide()
+    if(!ativos.email) $(".toogle-visibility-email").hide()
+    if(!ativos.senha) $(".toogle-visibility-senha").hide()
+    if(!ativos.tipo) $(".toogle-visibility-tipo").hide()
 }
 
 function carregarTiposUsuario(){
@@ -178,7 +194,7 @@ function carregarTiposUsuario(){
 
     $.ajax({
         method: "GET",
-        url: "http://localhost:3333/tiposusuario",
+        url: CONFIG.URL_API + "/tiposusuario",
         success: (result) => {
             tiposUsuario = result;
             for(var i in result){
@@ -207,7 +223,7 @@ function getUsers(){
 
     $.ajax({
         method: "GET",
-        url: "http://localhost:3333/usuarios",
+        url: CONFIG.URL_API + "/usuarios",
         success: (result) => {
             usuarios = result;
             listarUsuarios();
@@ -219,7 +235,7 @@ function getUsersByName(nome){
     if(nome != ''){
         $.ajax({
             method: "POST",
-            url: "http://localhost:3333/getusersbyname/",
+            url: CONFIG.URL_API + "/getusersbyname/",
             data: {
                 nome: nome
             },
@@ -237,7 +253,7 @@ function getUsersByUsuario(usuario){
     if(usuario != ''){
         $.ajax({
             method: "POST",
-            url: "http://localhost:3333/getusersbyusuario/",
+            url: CONFIG.URL_API + "/getusersbyusuario/",
             data: {
                 usuario: usuario
             },
@@ -255,7 +271,7 @@ function getUsersByEmail(email){
     if(email != ''){
         $.ajax({
             method: "POST",
-            url: "http://localhost:3333/getusersbyemail/",
+            url: CONFIG.URL_API + "/getusersbyemail/",
             data: {
                 email: email
             },
@@ -273,7 +289,7 @@ function getUsersByTipo(idTipo){
     if(idTipo != 0){
         $.ajax({
             method: "POST",
-            url: "http://localhost:3333/getusersbytipo/",
+            url: CONFIG.URL_API + "/getusersbytipo/",
             data: {
                 idtipo: idTipo
             },
@@ -301,7 +317,7 @@ function montarCabecalhoTabela(ativos){
     if(ativos.usuario){retorno += '<th>Usuário</th>';}
     if(ativos.email){retorno += '<th>Email</th>';}
     if(ativos.senha){retorno += '<th>Senha</th>';}
-    if(ativos.tipo){retorno += '<th>Tipo';}
+    if(ativos.tipo){retorno += '<th>Tipo</th>';}
     return retorno;
 }
 
@@ -352,7 +368,12 @@ function montarTabelaUsuariosExportar(){
     return tabela;
 }
 
-$(() => {
+$(async () => {
+
+    await fetch("../js/config.json").then(response => response.text()).then(text => {
+        CONFIG = JSON.parse(text);
+    });
+
     carregarTiposUsuario();
     getUsers();
 

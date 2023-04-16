@@ -1,0 +1,199 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/cadastro-de-produtos.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-12">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-success" data-bs-toggle='modal' data-bs-target='#modalEditarProduto' id="bCadastrarProduto">Cadastrar novo produto</button>&nbsp;
+                    <button type="button" class="btn btn-success" id="bExportarDadosProdutos">Exportar dados</button>
+                </div>
+                <div style="width: 50px; height: 50px; float:right;">
+                    <img class="img-fluid" src="../icons/cancel.png" id="bFechar"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col">
+                            <span><b>Selecionar campos visíveis</b></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelDescricao" toogle-visibility="descricao">
+                                <label class="form-check-label" for="cVisivelDescricao">Descrição</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelCusto" toogle-visibility="custo">
+                                <label class="form-check-label" for="cVisivelCusto">Custo</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelVenda" toogle-visibility="venda">
+                                <label class="form-check-label" for="cVisivelVenda">Venda</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelLucro" toogle-visibility="lucro">
+                                <label class="form-check-label" for="cVisivelLucro">Lucro</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelEstoque" toogle-visibility="estoque">
+                                <label class="form-check-label" for="cVisivelEstoque">Estoque</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelSetor" toogle-visibility="setor">
+                                <label class="form-check-label" for="cVisivelSetor">Setor</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cVisivelAcoes" toogle-visibility="acoes">
+                                <label class="form-check-label" for="cVisivelAcoes">Ações</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="alert alert-primary">
+                <div class="row">
+                    <div class="col-12">
+                        <span><b>Buscar produto</b></span>
+                    </div>
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                            <select class="form-control" id="sBuscarPor" onchange="changeBuscar()">
+                                <option value="Descricao">Descrição</option>
+                                <option value="Setor">Setor</option>
+                            </select>
+                            <input type="text" class="form-control" id="iBuscarDescricao" placeholder="Digite a descrição" aria-label="Username" aria-describedby="basic-addon1">
+                            <select style="display: none;" class="form-control" id="iBuscarSetor"></select>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <table class="table  table-primary table-hover" id="tableProdutos">
+                <thead>
+                    <tr>
+                        <th style="display: none;">ID</th>
+                        <th class="toogle-visibility-descricao">Descrição</th>
+                        <th class="toogle-visibility-custo">Custo</th>
+                        <th class="toogle-visibility-venda">Venda</th>
+                        <th class="toogle-visibility-lucro">Lucro</th>
+                        <th class="toogle-visibility-estoque">Estoque</th>
+                        <th class="toogle-visibility-setor">Setor</th>
+                        <th class="toogle-visibility-acoes">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12">
+            <span>Exibindo resultados: <span id="sInitCont"></span> - <span id="sFinalCont"></span> de <span id="sTotalResultados"></span></span>
+        </div>
+        <div class="col-12">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous" id="aPaginaAnterior">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <div id="dPaginacaoResultados" style="display: flex;">
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    </div>
+                    <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next" id="aPaginaPosterior">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+        </div>
+
+        <!--Modals-->
+        <div class="modal fade" id="modalEditarProduto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditarProdutoTitulo">Editar produto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <input type="hidden" id="idProdutoEditar"/>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">Descrição</div>
+                                <input type="text" class="form-control" id="iDescricaoEditar">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">Preço de custo</div>
+                                <input type="text" class="form-control" id="iCustoEditar">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">Preço de venda</div>
+                                <input type="text" class="form-control" id="iVendaEditar">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">Lucro</div>
+                                <input type="text" mask="" class="form-control" id="iLucroEditar">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">Estoque</div>
+                                <input type="text" class="form-control" id="iEstoqueEditar">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">Setor</div>
+                                <select class="form-control" id="iSetorEditar"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limparEdicao();">Cancelar</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="salvarEdicao();">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Fim Modals-->
+
+        <script src="../js/jquery-3.6.4.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/cadastro-de-produtos.js"></script>
+    </body>
+</html>

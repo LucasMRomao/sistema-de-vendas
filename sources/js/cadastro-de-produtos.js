@@ -65,17 +65,16 @@ function changeBuscar(){
 }
 
 function montarSelectSetor(id_setor){
-    let $select = "<select class='form-control' disabled>";
+    let setor = setores.find(s => s.id == id_setor);
 
-    for(var i in setores){
-        $select += "<option value='";
-        $select += setores[i].id;
-        $select += "'";
-        if(id_setor == setores[i].id) $select += " selected";
-        $select += ">";
-        $select += setores[i].descricao;
-        $select += "</option>";
-    }
+    let $select = "<select class='form-control' disabled data-toggle='tooltip' data-placement='top' title='";
+    $select += setor.descricao;
+    $select += "'>"
+    $select += "<option value='";
+    $select += setor.id;
+    $select += "' selected>";
+    $select += setor.descricao;
+    $select += "</option>";
 
     $select += "</select>"
     return $select;
@@ -96,7 +95,7 @@ function listarProdutos(pagina){
         linha += produtos[i].id;
         linha += "</td>";
         linha += "<td class='toogle-visibility-descricao'>";
-        linha += "<input type='text' class='form-control' value='" + produtos[i].descricao + "' disabled />";
+        linha += "<input type='text' class='form-control' value='" + produtos[i].descricao + "' disabled disabled data-toggle='tooltip' data-placement='top' title='" + produtos[i].descricao + "'/>";
         linha += "</td>";
         linha += "<td class='toogle-visibility-custo'>";
         linha += "<input type='text' class='form-control' value='" + produtos[i].preco_custo + "' disabled />";
@@ -105,7 +104,7 @@ function listarProdutos(pagina){
         linha += "<input type='text' class='form-control' value='" + produtos[i].preco_venda + "' disabled />";
         linha += "</td>";
         linha += "<td class='toogle-visibility-lucro'>";
-        linha += "<input type='text' class='form-control' value='" + produtos[i].porcentagem_lucro + "' disabled/>";
+        linha += "<input type='text' class='form-control' value='" + produtos[i].porcentagem_lucro + "%' disabled/>";
         linha += "</td>";
         linha += "<td class='toogle-visibility-estoque'>";
         linha += "<input type='text' class='form-control' value='" + produtos[i].quantidade_estoque + "' disabled/>";

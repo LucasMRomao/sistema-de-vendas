@@ -39,6 +39,7 @@ $(() => {
                 success: (result) => {
                     console.log(result);
                     if(result[0]){
+                        window.electronAPI.setUsuarioLogado(result[0].id);
                         window.electronAPI.logar(result[0]);
                     }else{
                         alert("Usuário e/ou senha inválidos!");

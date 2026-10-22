@@ -12,7 +12,12 @@ $(() => {
 
     $("#bCadastroProdutos").click(() => {
         window.electronAPI.abrirCadastroProdutos();
-    })
+    });
+
+    $("#bTelaConfiguracoes").click(() => {
+        console.log("Abrir tela configurações");
+        window.electronAPI.abrirTelaConfiguracoes();
+    });
 
     $("#bSair").click(() => {
         if(confirm("Deseja realmente sair do sistema?")) window.electronAPI.fecharSistema();

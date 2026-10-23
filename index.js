@@ -7,6 +7,7 @@ function createWindow () {
 
   let cadastroUsuariosWindow = null;
   let cadastroProdutosWindow = null;
+  let cadastroClientesWindow = null;
   let configuracoesWindow = null;
 
   const loginWindow = new BrowserWindow({
@@ -54,6 +55,25 @@ function createWindow () {
       })
     }else{
       cadastroUsuariosWindow.show()
+    }
+  })
+
+  ipcMain.on('abrir-cadastro-clientes', () => {
+    if(cadastroClientesWindow == null){
+      cadastroClientesWindow = new BrowserWindow({
+        frame: false,
+        webPreferences: {
+          preload: path.join(__dirname, 'preload.js')
+        }
+      })
+  
+      cadastroClientesWindow.loadURL(`file://${__dirname}/sources/screens/cadastro-de-clientes.html`)
+  
+      cadastroClientesWindow.on("closed", () => {
+        cadastroClientesWindow = null
+      })
+    }else{
+      cadastroClientesWindow.show()
     }
   })
 

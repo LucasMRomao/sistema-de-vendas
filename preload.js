@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     fecharSistema: () => ipcRenderer.send('sair-do-sistema'),
     abrirCadastroUsuarios: () => ipcRenderer.send('abrir-cadastro-usuarios'),
     abrirCadastroProdutos: () => ipcRenderer.send('abrir-cadastro-produtos'),
+    abrirCadastroClientes: () => ipcRenderer.send('abrir-cadastro-clientes'),
     abrirTelaConfiguracoes: () => ipcRenderer.send('abrir-tela-configuracoes'),
     fecharTelaAtual: () => ipcRenderer.send('fechar-tela-atual')
 })

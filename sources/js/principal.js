@@ -14,6 +14,10 @@ $(() => {
         window.electronAPI.abrirCadastroProdutos();
     });
 
+    $("#bCadastroClientes").click(() => {
+        window.electronAPI.abrirCadastroClientes();
+    });
+
     $("#bTelaConfiguracoes").click(() => {
         console.log("Abrir tela configurações");
         window.electronAPI.abrirTelaConfiguracoes();

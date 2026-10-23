@@ -60,6 +60,18 @@ module.exports = {
     debug: Env.get('DB_DEBUG', false)
   },
 
+  mysql2: {
+    client: 'mysql2',
+    connection: {
+      host: Env.get('DB_HOST', 'localhost'),
+      port: Env.get('DB_PORT', '3307'),
+      user: Env.get('DB_USER', 'root'),
+      password: Env.get('DB_PASSWORD', 'lukasstheart'),
+      database: Env.get('DB_DATABASE', 'sistema_de_vendas')
+    },
+    debug: Env.get('DB_DEBUG', false)
+  },
+
   /*
   |--------------------------------------------------------------------------
   | PostgreSQL
